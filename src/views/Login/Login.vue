@@ -1,29 +1,26 @@
 <template>
-  <v-form @submit.prevent="onSubmit">
-    <v-img
-      class="mx-auto my-6"
-      max-width="228"
-      src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg"
-    ></v-img>
-
-    <v-card
-      class="mx-auto pa-12 pb-8"
+  <VForm @submit.prevent="onSubmit">
+    <VCard
+      class="mx-auto pa-12 pb-8 pt-6"
       elevation="8"
-      max-width="448"
+      width="448"
       rounded="lg"
     >
-      <div class="text-subtitle-1 text-medium-emphasis">Username</div>
+      <div class="text-center text-light-blue text-h6 mb-2">Welcome Back!</div>
+      <div class="mb-8 text-center text text-teal">Sign in to continue.</div>
 
-      <v-text-field
+      <div class="text-body-2 text-grey-darken-4 mb-1">Username</div>
+
+      <VTextField
         density="compact"
-        placeholder="Username"
+        placeholder="Enter username"
         prepend-inner-icon="mdi-email-outline"
         variant="outlined"
         v-model="user.username"
-      ></v-text-field>
+      ></VTextField>
 
       <div
-        class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"
+        class="text-body-2 text-grey-darken-4 d-flex align-center justify-space-between mb-1"
       >
         Password
         <a
@@ -36,18 +33,18 @@
         >
       </div>
 
-      <v-text-field
+      <VTextField
         :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
         :type="visible ? 'text' : 'password'"
         density="compact"
-        placeholder="Enter your password"
+        placeholder="Enter password"
         prepend-inner-icon="mdi-lock-outline"
         variant="outlined"
         @click:append-inner="visible = !visible"
         v-model="user.password"
-      ></v-text-field>
+      ></VTextField>
 
-      <v-btn
+      <VBtn
         block
         class="mb-8"
         color="blue"
@@ -56,9 +53,9 @@
         type="submit"
       >
         Log In
-      </v-btn>
+      </VBtn>
 
-      <v-card-text class="text-center">
+      <VCardText class="text-center">
         <a
           class="text-blue text-decoration-none"
           href="#"
@@ -67,34 +64,22 @@
         >
           Sign up now <v-icon icon="mdi-chevron-right"></v-icon>
         </a>
-      </v-card-text>
-    </v-card>
-  </v-form>
+      </VCardText>
+    </VCard>
+  </VForm>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref, reactive } from "vue";
 import router from "../../router/router";
 
-export default {
-  setup() {
-    const visible = ref(false);
-    const user = reactive({
-      username: "",
-      password: "",
-    });
+const visible = ref(false);
+const user = reactive({
+  username: "",
+  password: "",
+});
 
-    const onSubmit = () => {
-      console.log("data", user);
-      localStorage.setItem('LoggedIn', 'loggedIn');
-      router.push('/home');
-    };
-
-    return {
-      visible,
-      user,
-      onSubmit,
-    };
-  },
+const onSubmit = () => {
+  console.log("data", user);
 };
 </script>

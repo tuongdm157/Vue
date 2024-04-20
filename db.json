@@ -1,0 +1,18 @@
+{
+  "customers": [
+    {
+      "email": "abc@gmail.com",
+      "firstName": "aaa",
+      "lastName": "bbb",
+      "password": "111111",
+      "confirmPassword": "111111",
+      "checkbox": [
+        "Choice 1"
+      ],
+      "gender": "Male",
+      "country": "Philippines",
+      "description": "",
+      "id": "d14b"
+    }
+  ]
+}

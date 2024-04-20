@@ -1,17 +1,17 @@
-import axios from "axios"
+import axios from "axios";
 import { LS_KEY } from "../utils/constants.js";
 
 const http = axios.create({
     baseURL: import.meta.env.VITE_API_BASE,
     headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-    }
-})
+        Accept: "application/json",
+    },
+});
 
 http.interceptors.request.use(
     (config) => {
-        const authToken = localStorage.getItem(LS_KEY.AUTH_TOKEN)
+        const authToken = localStorage.getItem(LS_KEY.AUTH_TOKEN);
         if (authToken) {
             config.headers.Authorization = `Bearer ${authToken}`;
         }
@@ -19,7 +19,7 @@ http.interceptors.request.use(
     },
     (error) => {
         return Promise.reject(error);
-    },
+    }
 );
 
 http.interceptors.response.use(
@@ -28,7 +28,7 @@ http.interceptors.response.use(
     },
     function (error) {
         return Promise.reject(error);
-    },
+    }
 );
 
-export default http
+export default http;
