@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import AuthLayout from "../layouts/AuthLayout.vue";
+import DefaultLayout from "../layouts/DefaultLayout.vue";
 
 const  Login = ()=> import( "../views/Login/Login.vue");
 const  Home = ()=> import( "../views/Home/Home.vue");
@@ -40,6 +42,30 @@ const routes = [
                 beforeEnter : routerGuard,
                 component: Counter,
                 meta: {title: 'Counter'}
+            },
+            {
+                path: "/customers",
+                // meta: {
+                //     layout: DefaultLayout,
+                // },
+                component: () =>
+                    import("../views/Customer/CustomerList/CustomerList.vue"),
+            },
+            {
+                path: "/customers/new",
+                // meta: {
+                //     layout: DefaultLayout,
+                // },
+                component: () =>
+                    import("../views/Customer/AddEditCustomer/AddEditCustomer.vue"),
+            },
+            {
+                path: "/customers/:id",
+                // meta: {
+                //     layout: DefaultLayout,
+                // },
+                component: () =>
+                    import("../views/Customer/AddEditCustomer/AddEditCustomer.vue"),
             },
             {
                 path: '/:pathMatch(.*)*',
