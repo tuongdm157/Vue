@@ -2,84 +2,84 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import AuthLayout from "../layouts/AuthLayout.vue";
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 
-const  Login = ()=> import( "../views/Login/Login.vue");
-const  Home = ()=> import( "../views/Home/Home.vue");
-const  Counter = ()=> import("../views/Counter/Counter.vue");
-const  Template = ()=> import("../components/template/Template.vue");
-const Customer = () => import("../views/Customer/CustomerList/CustomerList.vue");
-const CustomerAddEdit = () => import("../views/Customer/AddEditCustomer/AddEditCustomer.vue");
+const Login = () => import("../views/Login/Login.vue");
+const Home = () => import("../views/Home/Home.vue");
+const Counter = () => import("../views/Counter/Counter.vue");
+const Template = () => import("../components/template/Template.vue");
+const Customer = () =>
+    import("../views/Customer/CustomerList/CustomerList.vue");
+const CustomerAddEdit = () =>
+    import("../views/Customer/AddEditCustomer/AddEditCustomer.vue");
 
-const routerGuard = (to: any, from: any, next: any) =>{
-    const loggedIn =  localStorage.getItem('LoggedIn');
-    if(loggedIn){
+const routerGuard = (to: any, from: any, next: any) => {
+    const loggedIn = localStorage.getItem("LoggedIn");
+    if (loggedIn) {
         next();
     } else {
-        next('/login');
+        next("/login");
     }
-}
+};
 
 const routes = [
     {
         path: "/",
         name: "template",
-        beforeEnter : routerGuard,
+        beforeEnter: routerGuard,
         component: Template,
-        meta: {title: 'Template'},
+        meta: { title: "Template" },
         children: [
             {
                 path: "",
-                beforeEnter : routerGuard,
+                beforeEnter: routerGuard,
                 component: Home,
             },
             {
                 path: "/home",
                 name: "home",
-                beforeEnter : routerGuard,
+                beforeEnter: routerGuard,
                 component: Home,
-                meta: {title: 'Home'}
+                meta: { title: "Home" },
             },
             {
                 path: "/counter",
                 name: "counter",
-                beforeEnter : routerGuard,
+                beforeEnter: routerGuard,
                 component: Counter,
-                meta: {title: 'Counter'}
+                meta: { title: "Counter" },
             },
             {
-                path: "/customer",
-                beforeEnter : routerGuard,
+                path: "/customers",
+                beforeEnter: routerGuard,
                 component: Customer,
-                meta: {title: 'Home'}
+                meta: { title: "Home" },
             },
             {
-                path: "/customer/new",
-                beforeEnter : routerGuard,
-                component: CustomerAddEdit ,
-                meta: {title: 'CustomerAddEdit'}
+                path: "/customers/new",
+                beforeEnter: routerGuard,
+                component: CustomerAddEdit,
+                meta: { title: "CustomerAddEdit" },
             },
             {
-                path: "/customer/:id",
-                beforeEnter : routerGuard,
-                component: CustomerAddEdit ,
-                meta: {title: 'CustomerAddEdit'}
+                path: "/customers/:id",
+                beforeEnter: routerGuard,
+                component: CustomerAddEdit,
+                meta: { title: "CustomerAddEdit" },
             },
             {
-                path: '/:pathMatch(.*)*',
+                path: "/:pathMatch(.*)*",
                 component: Home,
-                name: 'home',
-                meta: {title: 'home'}
+                name: "home",
+                meta: { title: "home" },
             },
-        ]
+        ],
     },
     {
         path: "/login",
         component: Login,
-        name: 'login',
-        meta: {title: 'Login'}
+        name: "login",
+        meta: { title: "Login", layout: AuthLayout },
     },
 ];
-
-
 
 const router = createRouter({
     history: createWebHistory(),
@@ -87,16 +87,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login'];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('LoggedIn');
+    const publicPages = ["/login"];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem("LoggedIn");
 
-  // trying to access a restricted page + not logged in
-  // redirect to login page
-  if (authRequired && !loggedIn) {
-    next('/login');
-  } else {
-    next();
-  }
+    // trying to access a restricted page + not logged in
+    // redirect to login page
+    if (authRequired && !loggedIn) {
+        next("/login");
+    } else {
+        next();
+    }
 });
 export default router;
