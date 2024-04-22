@@ -22,7 +22,7 @@ const state = reactive({
 
             <v-list density="compact" nav>
                 <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" to="/home"></v-list-item>
-                <v-list-item prepend-icon="mdi-account" title="Counter" value="Counter" to="/counter"></v-list-item>
+                <v-list-item prepend-icon="mdi-account" title="Customer" value="Customer" to="/customer"></v-list-item>
             </v-list>
         </v-navigation-drawer>
         <v-app-bar density="compact">
@@ -40,6 +40,7 @@ const state = reactive({
 }
 .v-list-item__append .nav_icon_bar.v-btn--variant-elevated  {
     box-shadow: unset;
+    background: unset;
 }
 .v-list-item__append .nav_icon_bar.v-btn--icon.v-btn--density-default {
     width: 40px;

@@ -4,8 +4,10 @@ import DefaultLayout from "../layouts/DefaultLayout.vue";
 
 const  Login = ()=> import( "../views/Login/Login.vue");
 const  Home = ()=> import( "../views/Home/Home.vue");
-const  Counter = ()=> import( "../views/Counter/Counter.vue");
-const  Template = ()=> import( "../components/template/Template.vue");
+const  Counter = ()=> import("../views/Counter/Counter.vue");
+const  Template = ()=> import("../components/template/Template.vue");
+const Customer = () => import("../views/Customer/CustomerList/CustomerList.vue");
+const CustomerAddEdit = () => import("../views/Customer/AddEditCustomer/AddEditCustomer.vue");
 
 const routerGuard = (to: any, from: any, next: any) =>{
     const loggedIn =  localStorage.getItem('LoggedIn');
@@ -44,28 +46,22 @@ const routes = [
                 meta: {title: 'Counter'}
             },
             {
-                path: "/customers",
-                // meta: {
-                //     layout: DefaultLayout,
-                // },
-                component: () =>
-                    import("../views/Customer/CustomerList/CustomerList.vue"),
+                path: "/customer",
+                beforeEnter : routerGuard,
+                component: Customer,
+                meta: {title: 'Home'}
             },
             {
-                path: "/customers/new",
-                // meta: {
-                //     layout: DefaultLayout,
-                // },
-                component: () =>
-                    import("../views/Customer/AddEditCustomer/AddEditCustomer.vue"),
+                path: "/customer/new",
+                beforeEnter : routerGuard,
+                component: CustomerAddEdit ,
+                meta: {title: 'CustomerAddEdit'}
             },
             {
-                path: "/customers/:id",
-                // meta: {
-                //     layout: DefaultLayout,
-                // },
-                component: () =>
-                    import("../views/Customer/AddEditCustomer/AddEditCustomer.vue"),
+                path: "/customer/:id",
+                beforeEnter : routerGuard,
+                component: CustomerAddEdit ,
+                meta: {title: 'CustomerAddEdit'}
             },
             {
                 path: '/:pathMatch(.*)*',

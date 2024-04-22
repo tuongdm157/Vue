@@ -81,5 +81,7 @@ const user = reactive({
 
 const onSubmit = () => {
   console.log("data", user);
+  localStorage.setItem('LoggedIn', 'loggedIn');
+  router.push('/home');
 };
 </script>
