@@ -74,6 +74,7 @@
 
 <script lang="ts">
 import { ref, reactive } from "vue";
+import router from "../../router/router";
 
 export default {
   setup() {
@@ -85,6 +86,8 @@ export default {
 
     const onSubmit = () => {
       console.log("data", user);
+      localStorage.setItem('LoggedIn', 'loggedIn');
+      router.push('/home');
     };
 
     return {

@@ -13,7 +13,7 @@ const goToCounterPage = () => {
     <div>
         <Breadcrumbs :items="['Home']"/>
         <div class="pa-3">
-            <div class="mb-3">Hello World</div>
+            <div class="mb-3">Homepage</div>
             <v-btn @click="goToCounterPage">
                 Go to counter page
             </v-btn>
